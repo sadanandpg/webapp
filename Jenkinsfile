@@ -33,11 +33,11 @@ pipeline{
       withCredentails(
           [
               usernamePassword(credentials:'server credentials', usernameVariable:USER,
-              passwordVariable: PWD )
+              passwordVariable: PASSWORD )
           ]
       )
       {
-            echo "values ${USER}"
+        echo "values ${USER} and ${PASSWORD}"
       }
       }
     }
