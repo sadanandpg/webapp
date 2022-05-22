@@ -30,15 +30,14 @@ pipeline{
       echo "deploying web application 2"
       echo "version is ${SERVER_CREDENTIALS}"
       
-      withCredentails(
-          [
-              usernamePassword(credentials:'server credentials', usernameVariable:USER,
-              passwordVariable: PASSWORD )
-          ]
-      )
-      {
-        echo "values ${USER} and ${PASSWORD}"
-      }
+      withCredentials([usernamePassword(credentialsId: 'server credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+  
+  sh 'echo $PASSWORD'
+  // also available as a Groovy variable
+  echo USERNAME
+  // or inside double quotes for string interpolation
+  echo "username is $USERNAME"
+}
       }
     }
     
