@@ -37,7 +37,7 @@ pipeline{
           ]
       )
       {
-            echo "values ${USER} and ${PWD}"
+            echo "values ${USER}"
       }
       }
     }
