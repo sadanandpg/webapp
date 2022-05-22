@@ -29,7 +29,16 @@ pipeline{
       {
       echo "deploying web application 2"
       echo "version is ${SERVER_CREDENTIALS}"
-      sh "${SERVER_CREDENTIALS}"
+      
+      withCredentails(
+          [
+              usernamePassword(credentials:'server credentials', usernameVariable:USER,
+              passwordVariable: PWD )
+          ]
+      )
+      {
+            echo "values ${USER} and ${PWD}"
+      }
       }
     }
     
