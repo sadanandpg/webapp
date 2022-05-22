@@ -5,6 +5,10 @@ pipeline{
       NEW_VERSION='1.3.0'
       SERVER_CREDENTIALS= credentials('server credentials')
   }
+  parameters{
+      choice(name:'VERSION', choices:['1','2','3'],description:'version number')
+      boolean(name:'executetest', defaultValue:'true',description:'selection')
+  }
   
   stages{
     
@@ -18,6 +22,13 @@ pipeline{
     }
     stage("test")
     {
+      when{
+          expression
+          {
+              params.executetest
+          }
+
+      }
       steps
       {
       echo "testing web application 2"
@@ -28,8 +39,9 @@ pipeline{
       steps
       {
       echo "deploying web application 2"
+      echo "version is ${params.VERSION}"
       echo "version is ${SERVER_CREDENTIALS}"
-      
+
       withCredentials([usernamePassword(credentialsId: 'server credentials', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
   
   sh 'echo $PASSWORD'
@@ -38,6 +50,8 @@ pipeline{
   // or inside double quotes for string interpolation
   echo "username is $USERNAME"
 }
+      
+      
       }
     }
     
