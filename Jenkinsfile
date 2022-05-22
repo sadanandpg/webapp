@@ -8,21 +8,21 @@ pipeline{
     {
       steps
       {
-      echo "building web application 1"
+      echo "building web application 2"
       }
     }
     stage("test")
     {
       steps
       {
-      echo "testing web application 1"
+      echo "testing web application 2"
       }
     }
     stage("deploy")
     {
       steps
       {
-      echo "deploying web application 1"
+      echo "deploying web application 2"
       }
     }
     
@@ -30,7 +30,7 @@ pipeline{
   post{
     always
     {
-      echo "after stages web application 1"
+      echo "after stages web application 2"
     }
     
   }
